@@ -1,0 +1,22 @@
+{
+  "name": "mobber",
+  "version": "1.0.0",
+  "description": "Mobber is a React-Redux application to help you organize your Mob Programming sessions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd client && npm i",
+    "start": "cd client && npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmichaelbrown8/mobber.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmichaelbrown8/mobber/issues"
+  },
+  "homepage": "https://github.com/jmichaelbrown8/mobber#readme"
+}
