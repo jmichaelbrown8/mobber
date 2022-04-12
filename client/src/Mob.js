@@ -60,6 +60,15 @@ export function Mob() {
         />
         <button type="submit">+</button>
       </form>
+      <button
+        type="button"
+        onClick={() => {
+          store.dispatch({ type: "ROTATE_MEMBERS" });
+        }}
+      >
+        Rotate
+      </button>
+      <button type="button">Shuffle</button>
     </div>
   );
 }

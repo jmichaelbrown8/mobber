@@ -16,6 +16,11 @@ export default function appReducer(state = initialState, action) {
         ...state,
         mob: state.mob.filter((mobber, index) => index !== action.payload),
       };
+    case "ROTATE_MEMBERS":
+      return {
+        ...state,
+        mob: [...state.mob.slice(-1), ...state.mob.slice(0, -1)],
+      };
     default:
       // If this reducer doesn't recognize the action type, or doesn't
       // care about this specific action, return the existing state unchanged
