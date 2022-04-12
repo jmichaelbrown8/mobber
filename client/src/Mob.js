@@ -1,12 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import store from "./store";
 
-const selectMob = (state) => state.mob;
-
 export function Mob() {
-  const mob = useSelector(selectMob);
-  // const state = store.getState();
+  const mob = useSelector((state) => state.mob);
   const [userInput, setUserInput] = useState("");
 
   const addUser = (e) => {
@@ -15,11 +12,34 @@ export function Mob() {
     setUserInput("");
   };
 
+  const getRole = (i) => {
+    switch (i) {
+      case 0:
+        return "Driver";
+      case 1:
+        return "Navigator";
+      default:
+        return "Mobber";
+    }
+  };
+
+  const getNextDriver = () => {
+    if (!mob.length) return "";
+    return mob[mob.length - 1];
+  };
+  const getNextNavigator = () => {
+    if (!mob.length) return "";
+    return mob[0];
+  };
+
   return (
     <div>
       {mob.map((mobber, i) => {
         return (
           <div key={mobber + i}>
+            {i === 0 ? <div>Next Driver: {getNextDriver()}</div> : ""}
+            {i === 1 ? <div>Next Navigator: {getNextNavigator()}</div> : ""}
+            <label>{getRole(i)}</label>
             <input type="text" value={mobber} disabled />
             <button
               type="button"

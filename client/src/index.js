@@ -6,21 +6,6 @@ import store from "./store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
 
-console.log("Initial state: ", store.getState());
-
-const unsubscribe = store.subscribe(() =>
-  console.log("State after dispatch: ", store.getState())
-);
-
-store.dispatch({ type: "ADD_MEMBER", payload: "J." });
-store.dispatch({ type: "ADD_MEMBER", payload: "Claire" });
-store.dispatch({ type: "ADD_MEMBER", payload: "Wesley" });
-store.dispatch({ type: "ADD_MEMBER", payload: "Luke" });
-
-unsubscribe();
-
-store.dispatch({ type: "ADD_MEMBER", payload: "Grandpa" });
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
