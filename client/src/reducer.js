@@ -1,5 +1,6 @@
 const initialState = {
   mob: [],
+  rotations: 0,
 };
 
 // Use the initialState as a default value
@@ -20,6 +21,7 @@ export default function appReducer(state = initialState, action) {
       return {
         ...state,
         mob: [...state.mob.slice(-1), ...state.mob.slice(0, -1)],
+        rotations: state.rotations + 1,
       };
     default:
       // If this reducer doesn't recognize the action type, or doesn't

@@ -1,7 +1,7 @@
 import React from "react";
 // import { Timer } from "./features/timer/Timeer";
 import { Mob } from "./Mob";
-// import { Summary } from "./features/summary/Summary";
+import { Summary } from "./Summary";
 import "./App.css";
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
       <header className="App-header">
         {/* <Timer /> */}
         <Mob />
-        {/* <Summary /> */}
+        <Summary />
       </header>
     </div>
   );

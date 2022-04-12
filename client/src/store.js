@@ -4,6 +4,7 @@ import appReducer from "./reducer";
 // this can pull from localstorage or a persistent data store later
 let preloadedState = {
   mob: [],
+  rotations: 0,
 };
 
 const store = createStore(appReducer, preloadedState);
