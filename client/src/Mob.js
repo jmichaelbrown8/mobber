@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import store from "./store";
 import shuffleArray from "./utils/shuffleArray";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import RotateRightIcon from "@mui/icons-material/RotateRight";
+import ShuffleIcon from "@mui/icons-material/Shuffle";
+import { Divider, InputAdornment, TextField, Typography } from "@mui/material";
+import { Box } from "@mui/system";
 
 export function Mob() {
   const mob = useSelector((state) => state.mob);
@@ -39,44 +47,101 @@ export function Mob() {
   };
 
   return (
-    <div>
+    <Box
+      onSubmit={addUser}
+      component="form"
+      sx={{
+        "& .MuiTextField-root": { m: 1, width: "25ch" },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      {/* List out the existing mob members */}
       {mob.map((mobber, i) => {
         return (
           <div key={mobber + i}>
-            {i === 0 ? <div>Next Driver: {getNextDriver()}</div> : ""}
-            {i === 1 ? <div>Next Navigator: {getNextNavigator()}</div> : ""}
-            <label>{getRole(i)}</label>
-            <input type="text" value={mobber} disabled />
-            <button
-              type="button"
-              onClick={() =>
-                store.dispatch({ type: "REMOVE_MEMBER", payload: i })
-              }
-            >
-              x
-            </button>
+            {/* If the first member, show the next driver */}
+            {i === 0 ? (
+              <Typography variant="subtitle1">
+                Next Driver: {getNextDriver()}
+              </Typography>
+            ) : (
+              ""
+            )}
+
+            {/* If the second member, show the next navigator */}
+            {i === 1 ? (
+              <Typography variant="subtitle1">
+                Next Navigator: {getNextNavigator()}
+              </Typography>
+            ) : (
+              ""
+            )}
+
+            {/* If the third member, show the mobber subtitle */}
+            {i === 2 ? (
+              <Typography variant="subtitle1">Mobbers:</Typography>
+            ) : (
+              ""
+            )}
+            <TextField
+              label={getRole(i)}
+              variant="outlined"
+              value={mobber}
+              InputProps={{
+                readOnly: true,
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Tooltip title="Remove member">
+                      <IconButton
+                        onClick={() =>
+                          store.dispatch({ type: "REMOVE_MEMBER", payload: i })
+                        }
+                        color="error"
+                      >
+                        <RemoveCircleIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </InputAdornment>
+                ),
+              }}
+            />
           </div>
         );
       })}
-      <form onSubmit={addUser}>
-        <input
-          type="text"
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-        />
-        <button type="submit">+</button>
-      </form>
-      <button
-        type="button"
-        onClick={() => {
-          store.dispatch({ type: "ROTATE_MEMBERS" });
+
+      {/* New member input area */}
+      <TextField
+        label="Add member"
+        variant="outlined"
+        value={userInput}
+        onChange={(e) => setUserInput(e.target.value)}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton type="submit" color="success">
+                <AddCircleIcon />
+              </IconButton>
+            </InputAdornment>
+          ),
         }}
-      >
-        Rotate
-      </button>
-      <button type="button" onClick={shuffleMembers}>
-        Shuffle
-      </button>
-    </div>
+      />
+      <div>
+        <Tooltip title="Rotate roles">
+          <IconButton
+            onClick={() => {
+              store.dispatch({ type: "ROTATE_MEMBERS" });
+            }}
+          >
+            <RotateRightIcon />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Shuffle order">
+          <IconButton onClick={shuffleMembers}>
+            <ShuffleIcon />
+          </IconButton>
+        </Tooltip>
+      </div>
+    </Box>
   );
 }
