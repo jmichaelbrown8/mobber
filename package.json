@@ -4,6 +4,8 @@
   "description": "Mobber is a React-Redux application to help you organize your Mob Programming sessions.",
   "main": "index.js",
   "scripts": {
+    "predeploy": "cd client && npm run predeploy",
+    "deploy": "cd client && npm run deploy",
     "test": "cd client && npm test",
     "install": "cd client && npm i",
     "start": "cd client && npm start"
