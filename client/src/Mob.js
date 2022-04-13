@@ -8,7 +8,7 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
-import { Divider, InputAdornment, TextField, Typography } from "@mui/material";
+import { InputAdornment, TextField, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 export function Mob() {
@@ -62,7 +62,7 @@ export function Mob() {
           <div key={mobber + i}>
             {/* If the first member, show the next driver */}
             {i === 0 ? (
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" color="primary">
                 Next Driver: {getNextDriver()}
               </Typography>
             ) : (
@@ -71,7 +71,7 @@ export function Mob() {
 
             {/* If the second member, show the next navigator */}
             {i === 1 ? (
-              <Typography variant="subtitle1">
+              <Typography variant="subtitle1" color="secondary">
                 Next Navigator: {getNextNavigator()}
               </Typography>
             ) : (
@@ -80,7 +80,9 @@ export function Mob() {
 
             {/* If the third member, show the mobber subtitle */}
             {i === 2 ? (
-              <Typography variant="subtitle1">Mobbers:</Typography>
+              <Typography variant="subtitle1" color="error">
+                Mobbers:
+              </Typography>
             ) : (
               ""
             )}
@@ -88,6 +90,8 @@ export function Mob() {
               label={getRole(i)}
               variant="outlined"
               value={mobber}
+              color={i === 0 ? "primary" : i === 1 ? "secondary" : "error"}
+              focused
               InputProps={{
                 readOnly: true,
                 endAdornment: (
