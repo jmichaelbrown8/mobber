@@ -5,6 +5,13 @@ import appReducer from "./reducer";
 let preloadedState = {
   mob: [],
   rotations: 0,
+  time: {
+    // all times stored as seconds
+    elapsed: 0,
+    running: false,
+    remaining: 0,
+    duration: 300,
+  },
 };
 
 const store = createStore(appReducer, preloadedState);

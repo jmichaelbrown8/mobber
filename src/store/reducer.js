@@ -1,12 +1,22 @@
+import { accordionActionsClasses } from "@mui/material";
+
 const initialState = {
   mob: [],
   rotations: 0,
+  time: {
+    // all times stored as seconds
+    elapsed: 0,
+    running: false,
+    remaining: 0,
+    duration: 300,
+  },
 };
 
 // Use the initialState as a default value
 export default function appReducer(state = initialState, action) {
   // The reducer normally looks at the action type field to decide what happens
   switch (action.type) {
+    // Member actions
     case "ADD_MEMBER":
       return {
         ...state,
@@ -28,6 +38,38 @@ export default function appReducer(state = initialState, action) {
         ...state,
         mob: action.payload,
       };
+
+    // Timer actions
+    case "RESET_TIMER":
+      return {
+        ...state,
+        time: {
+          ...state.time,
+          remaining: state.time.duration,
+        },
+      };
+    case "TOGGLE_TIMER":
+      return {
+        ...state,
+        time: {
+          ...state.time,
+          running: !state.time.running,
+        },
+      };
+    case "SET_DURATION":
+      return {
+        ...state,
+        time: {
+          ...state.time,
+          duration: action.payload,
+          // if the new duration is less than time remaining, update it, otherwise keep it
+          remaining:
+            action.payload < state.time.remaining
+              ? action.payload
+              : state.time.remaining,
+        },
+      };
+
     default:
       // If this reducer doesn't recognize the action type, or doesn't
       // care about this specific action, return the existing state unchanged

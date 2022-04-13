@@ -1,5 +1,6 @@
 import React from "react";
-// import { Timer } from "./features/timer/Timeer";
+import { Header } from "./view/Header";
+import { Timer } from "./view/Timer";
 import { Mob } from "./view/Mob";
 import { Summary } from "./view/Summary";
 import { Box } from "@mui/system";
@@ -15,9 +16,9 @@ function App() {
           minHeight: "100vh",
         }}
       >
-        {/* <header className="App-header"></header> */}
+        <Header />
 
-        {/* <Timer /> */}
+        <Timer />
         <Mob />
         <Summary />
       </Box>
