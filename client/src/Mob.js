@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import store from "./store";
+import shuffleArray from "./utils/shuffleArray";
 
 export function Mob() {
   const mob = useSelector((state) => state.mob);
@@ -30,6 +31,11 @@ export function Mob() {
   const getNextNavigator = () => {
     if (!mob.length) return "";
     return mob[0];
+  };
+
+  const shuffleMembers = () => {
+    const newOrder = shuffleArray(mob);
+    store.dispatch({ type: "SET_MEMBERS", payload: newOrder });
   };
 
   return (
@@ -68,7 +74,9 @@ export function Mob() {
       >
         Rotate
       </button>
-      <button type="button">Shuffle</button>
+      <button type="button" onClick={shuffleMembers}>
+        Shuffle
+      </button>
     </div>
   );
 }

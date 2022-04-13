@@ -23,6 +23,11 @@ export default function appReducer(state = initialState, action) {
         mob: [...state.mob.slice(-1), ...state.mob.slice(0, -1)],
         rotations: state.rotations + 1,
       };
+    case "SET_MEMBERS":
+      return {
+        ...state,
+        mob: action.payload,
+      };
     default:
       // If this reducer doesn't recognize the action type, or doesn't
       // care about this specific action, return the existing state unchanged
