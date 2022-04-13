@@ -8,7 +8,12 @@ import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RotateRightIcon from "@mui/icons-material/RotateRight";
 import ShuffleIcon from "@mui/icons-material/Shuffle";
-import { InputAdornment, TextField, Typography } from "@mui/material";
+import {
+  Container,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 
 export function Mob() {
@@ -47,105 +52,110 @@ export function Mob() {
   };
 
   return (
-    <Box
-      onSubmit={addUser}
-      component="form"
-      sx={{
-        "& .MuiTextField-root": { m: 1, width: "25ch" },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      {/* List out the existing mob members */}
-      {mob.map((mobber, i) => {
-        return (
-          <div key={mobber + i}>
-            {/* If the first member, show the next driver */}
-            {i === 0 ? (
-              <Typography variant="subtitle1" color="primary">
-                Next Driver: {getNextDriver()}
-              </Typography>
-            ) : (
-              ""
-            )}
-
-            {/* If the second member, show the next navigator */}
-            {i === 1 ? (
-              <Typography variant="subtitle1" color="secondary">
-                Next Navigator: {getNextNavigator()}
-              </Typography>
-            ) : (
-              ""
-            )}
-
-            {/* If the third member, show the mobber subtitle */}
-            {i === 2 ? (
-              <Typography variant="subtitle1" color="error">
-                Mobbers:
-              </Typography>
-            ) : (
-              ""
-            )}
-            <TextField
-              label={getRole(i)}
-              variant="outlined"
-              value={mobber}
-              color={i === 0 ? "primary" : i === 1 ? "secondary" : "error"}
-              focused
-              InputProps={{
-                readOnly: true,
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <Tooltip title="Remove member">
-                      <IconButton
-                        onClick={() =>
-                          store.dispatch({ type: "REMOVE_MEMBER", payload: i })
-                        }
-                        color="error"
-                      >
-                        <RemoveCircleIcon />
-                      </IconButton>
-                    </Tooltip>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </div>
-        );
-      })}
-
-      {/* New member input area */}
-      <TextField
-        label="Add member"
-        variant="outlined"
-        value={userInput}
-        onChange={(e) => setUserInput(e.target.value)}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton type="submit" color="success">
-                <AddCircleIcon />
-              </IconButton>
-            </InputAdornment>
-          ),
+    <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
+      <Box
+        onSubmit={addUser}
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
         }}
-      />
-      <div>
-        <Tooltip title="Rotate roles">
-          <IconButton
-            onClick={() => {
-              store.dispatch({ type: "ROTATE_MEMBERS" });
-            }}
-          >
-            <RotateRightIcon />
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Shuffle order">
-          <IconButton onClick={shuffleMembers}>
-            <ShuffleIcon />
-          </IconButton>
-        </Tooltip>
-      </div>
-    </Box>
+        noValidate
+        autoComplete="off"
+      >
+        {/* List out the existing mob members */}
+        {mob.map((mobber, i) => {
+          return (
+            <div key={mobber + i}>
+              {/* If the first member, show the next driver */}
+              {i === 0 ? (
+                <Typography variant="subtitle1" color="primary">
+                  Next Driver: {getNextDriver()}
+                </Typography>
+              ) : (
+                ""
+              )}
+
+              {/* If the second member, show the next navigator */}
+              {i === 1 ? (
+                <Typography variant="subtitle1" color="secondary">
+                  Next Navigator: {getNextNavigator()}
+                </Typography>
+              ) : (
+                ""
+              )}
+
+              {/* If the third member, show the mobber subtitle */}
+              {i === 2 ? (
+                <Typography variant="subtitle1" color="error">
+                  Mobbers:
+                </Typography>
+              ) : (
+                ""
+              )}
+              <TextField
+                label={getRole(i)}
+                variant="outlined"
+                value={mobber}
+                color={i === 0 ? "primary" : i === 1 ? "secondary" : "error"}
+                focused
+                InputProps={{
+                  readOnly: true,
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <Tooltip title="Remove member">
+                        <IconButton
+                          onClick={() =>
+                            store.dispatch({
+                              type: "REMOVE_MEMBER",
+                              payload: i,
+                            })
+                          }
+                          color="error"
+                        >
+                          <RemoveCircleIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </div>
+          );
+        })}
+
+        {/* New member input area */}
+        <TextField
+          label="Add member"
+          variant="outlined"
+          value={userInput}
+          onChange={(e) => setUserInput(e.target.value)}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton type="submit" color="success">
+                  <AddCircleIcon />
+                </IconButton>
+              </InputAdornment>
+            ),
+          }}
+        />
+        <div>
+          <Tooltip title="Rotate roles">
+            <IconButton
+              onClick={() => {
+                store.dispatch({ type: "ROTATE_MEMBERS" });
+              }}
+            >
+              <RotateRightIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Shuffle order">
+            <IconButton onClick={shuffleMembers}>
+              <ShuffleIcon />
+            </IconButton>
+          </Tooltip>
+        </div>
+      </Box>
+    </Container>
   );
 }
