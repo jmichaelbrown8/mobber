@@ -1,7 +1,7 @@
 import React from "react";
 // import { Timer } from "./features/timer/Timeer";
-import { Mob } from "./Mob";
-import { Summary } from "./Summary";
+import { Mob } from "./view/Mob";
+import { Summary } from "./view/Summary";
 import "./App.css";
 
 function App() {
