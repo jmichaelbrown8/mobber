@@ -9,7 +9,7 @@ let preloadedState = {
     // all times stored as seconds
     elapsed: 0,
     running: false,
-    remaining: 0,
+    remaining: 900,
     duration: 900,
   },
 };

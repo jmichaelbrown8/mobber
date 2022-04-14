@@ -5,7 +5,7 @@ const initialState = {
     // all times stored as seconds
     elapsed: 0,
     running: false,
-    remaining: 0,
+    remaining: 900,
     duration: 900,
   },
 };
@@ -74,6 +74,14 @@ export default function appReducer(state = initialState, action) {
             action.payload < state.time.remaining
               ? action.payload
               : state.time.remaining,
+        },
+      };
+    case "ADD_TWO_MINUTES":
+      return {
+        ...state,
+        time: {
+          ...state.time,
+          remaining: state.time.remaining + 120,
         },
       };
 
