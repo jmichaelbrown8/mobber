@@ -7,12 +7,23 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import { useSelector } from "react-redux";
 import store from "../store";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { Box, Card, Typography } from "@mui/material";
 import formatTime from "../utils/formatTime";
 
 export function Timer() {
   const { remaining, running, duration } = useSelector((state) => state.time);
+
+  useEffect(() => {
+    if (!running) return;
+    const timerId = setInterval(() => {
+      store.dispatch({ type: "DECREMENT_TIMER" });
+    }, 1000);
+
+    return () => {
+      clearInterval(timerId);
+    };
+  }, [running]);
 
   return (
     <Card

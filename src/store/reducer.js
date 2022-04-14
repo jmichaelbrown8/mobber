@@ -38,6 +38,14 @@ export default function appReducer(state = initialState, action) {
       };
 
     // Timer actions
+    case "DECREMENT_TIMER":
+      return {
+        ...state,
+        time: {
+          ...state.time,
+          remaining: state.time.remaining - 1,
+        },
+      };
     case "RESET_TIMER":
       return {
         ...state,
