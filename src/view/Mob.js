@@ -52,7 +52,7 @@ export function Mob() {
   };
 
   return (
-    <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
+    <Container component="main" sx={{ my: 2 }} maxWidth="sm">
       <Box
         onSubmit={addUser}
         component="form"

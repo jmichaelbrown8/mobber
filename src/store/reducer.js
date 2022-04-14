@@ -6,7 +6,7 @@ const initialState = {
     elapsed: 0,
     running: false,
     remaining: 0,
-    duration: 300,
+    duration: 900,
   },
 };
 
@@ -44,6 +44,7 @@ export default function appReducer(state = initialState, action) {
         time: {
           ...state.time,
           remaining: state.time.remaining - 1,
+          elapsed: state.time.elapsed + 1,
         },
       };
     case "RESET_TIMER":
