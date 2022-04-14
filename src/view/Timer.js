@@ -53,6 +53,7 @@ export function Timer() {
     <Card
       elevation={1}
       sx={{ display: "grid", justifyItems: "center", pt: 4, pb: 2 }}
+      maxWidth="xs"
     >
       <Container maxWidth="xs">
         <LinearProgress
@@ -64,33 +65,38 @@ export function Timer() {
         <Typography variant="h6">
           {formatTime(remaining)} / {formatTime(duration)}
         </Typography>
+
+        <Box>
+          <Tooltip title={running ? "Pause timer" : "Start timer"}>
+            <IconButton
+              onClick={() =>
+                store.dispatch({
+                  type: "TOGGLE_TIMER",
+                })
+              }
+              color="primary"
+            >
+              {running ? (
+                <PauseIcon fontSize="large" />
+              ) : (
+                <PlayArrowIcon fontSize="large" />
+              )}
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Reset timer">
+            <IconButton
+              onClick={() =>
+                store.dispatch({
+                  type: "RESET_TIMER",
+                })
+              }
+              color="secondary"
+            >
+              <RestoreIcon fontSize="large" />
+            </IconButton>
+          </Tooltip>
+        </Box>
       </Container>
-      <Box>
-        <Tooltip title={running ? "Pause timer" : "Start timer"}>
-          <IconButton
-            onClick={() =>
-              store.dispatch({
-                type: "TOGGLE_TIMER",
-              })
-            }
-            color="primary"
-          >
-            {running ? <PauseIcon /> : <PlayArrowIcon />}
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Reset timer">
-          <IconButton
-            onClick={() =>
-              store.dispatch({
-                type: "RESET_TIMER",
-              })
-            }
-            color="secondary"
-          >
-            <RestoreIcon />
-          </IconButton>
-        </Tooltip>
-      </Box>
     </Card>
   );
 }

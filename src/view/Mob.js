@@ -52,7 +52,7 @@ export function Mob() {
   };
 
   return (
-    <Container component="main" sx={{ my: 2 }} maxWidth="sm">
+    <Container component="main" sx={{ my: 2 }} maxWidth="xs">
       <Box
         onSubmit={addUser}
         component="form"
@@ -139,22 +139,22 @@ export function Mob() {
             ),
           }}
         />
-        <div>
-          <Tooltip title="Rotate roles">
-            <IconButton
-              onClick={() => {
-                store.dispatch({ type: "ROTATE_MEMBERS" });
-              }}
-            >
-              <RotateRightIcon />
-            </IconButton>
-          </Tooltip>
-          <Tooltip title="Shuffle order">
-            <IconButton onClick={shuffleMembers}>
-              <ShuffleIcon />
-            </IconButton>
-          </Tooltip>
-        </div>
+      </Box>
+      <Box>
+        <Tooltip title="Rotate roles">
+          <IconButton
+            onClick={() => {
+              store.dispatch({ type: "ROTATE_MEMBERS" });
+            }}
+          >
+            <RotateRightIcon fontSize="large" />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Shuffle order">
+          <IconButton onClick={shuffleMembers}>
+            <ShuffleIcon fontSize="large" />
+          </IconButton>
+        </Tooltip>
       </Box>
     </Container>
   );
