@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/mobber/static/css/main.5ff65b37.css",
-    "main.js": "/mobber/static/js/main.ab829c36.js",
+    "main.js": "/mobber/static/js/main.9f8079c4.js",
     "index.html": "/mobber/index.html",
     "main.5ff65b37.css.map": "/mobber/static/css/main.5ff65b37.css.map",
-    "main.ab829c36.js.map": "/mobber/static/js/main.ab829c36.js.map"
+    "main.9f8079c4.js.map": "/mobber/static/js/main.9f8079c4.js.map"
   },
   "entrypoints": [
     "static/css/main.5ff65b37.css",
-    "static/js/main.ab829c36.js"
+    "static/js/main.9f8079c4.js"
   ]
 }
