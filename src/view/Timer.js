@@ -31,19 +31,37 @@ const pulseStyle = {
 };
 
 export function Timer() {
-  const { remaining, running, duration } = useSelector((state) => state.time);
+  const { remaining, running, duration, elapsed } = useSelector(
+    (state) => state.time
+  );
   const [percent, setPercent] = useState(100);
 
   useEffect(() => {
     if (!running) return;
+    const startTime = Date.now();
+    const startRemaining = remaining;
+    const startElapsed = elapsed;
     const timerId = setInterval(() => {
-      store.dispatch({ type: "DECREMENT_TIMER" });
-    }, 1000);
+      // store.dispatch({ type: "DECREMENT_TIMER" });
+      // instead of decrementing the timer, which is dependent
+      // on javascript to be executing in the foreground, we're
+      // going to calculate time remaining and elapsed
+      const now = Date.now();
+      // The ~ is a bitwise operator, so doubling it effectively
+      // floors the number faster than Math.floor() would!
+      const difference = ~~((now - startTime) / 1000);
+      const calcRemaining = startRemaining - difference;
+      const calcElapsed = startElapsed + difference;
+      store.dispatch({
+        type: "SET_TIME",
+        payload: { remaining: calcRemaining, elapsed: calcElapsed },
+      });
+    }, 100);
 
     return () => {
       clearInterval(timerId);
     };
-  }, [running]);
+  }, [running]); // intentionally only affected by "running" state so it doesn't reset "now" variable in effect above which would cause timer drift
 
   useEffect(() => {
     setPercent((remaining / duration) * 100);

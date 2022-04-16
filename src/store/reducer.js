@@ -76,6 +76,15 @@ export default function appReducer(state = initialState, action) {
               : state.time.remaining,
         },
       };
+    case "SET_TIME":
+      return {
+        ...state,
+        time: {
+          ...state.time,
+          remaining: action.payload.remaining,
+          elapsed: action.payload.elapsed,
+        },
+      };
     case "ADD_TWO_MINUTES":
       return {
         ...state,

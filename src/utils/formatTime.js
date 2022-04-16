@@ -1,7 +1,14 @@
-export default function formatTime(seconds) {
+function formatTime(seconds) {
+  // pull negative
+  let multiplier = 1;
+  if (seconds < 0) {
+    multiplier = -1;
+    seconds *= multiplier;
+  }
+
   // Less than a minute
   if (seconds < 60) {
-    return `${seconds}s`;
+    return `${seconds * multiplier}s`;
   }
 
   const minutes = Math.floor(seconds / 60);
@@ -9,24 +16,18 @@ export default function formatTime(seconds) {
   // Less than 5 minutes
   if (seconds < 300) {
     const remainingSeconds = seconds % 60;
-    return `${minutes}m ${remainingSeconds}s`;
+    return `${minutes * multiplier}m ${remainingSeconds}s`;
   }
 
   // less than an hour
   if (seconds < 3600) {
-    return `${minutes}m`;
+    return `${minutes * multiplier}m`;
   }
 
   // longer than an hour
   const hours = Math.floor(minutes / 60);
   const remainingMinutes = minutes % 60;
-  return `${hours}h ${remainingMinutes}m`;
+  return `${hours * multiplier}h ${remainingMinutes}m`;
 }
 
-// console.log(formatTime(40)); // 40s
-
-// console.log(formatTime(140)); // 2m 20s
-
-// console.log(formatTime(600)); // 10m
-
-// console.log(formatTime(7260)); // 2h 1m
+module.exports = formatTime;
