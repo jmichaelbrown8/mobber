@@ -1,8 +1,13 @@
 {
   "name": "mobber",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
   "description": "Mobber is a React-Redux application to help you organize your Mob Programming sessions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd client && npm run test && cd ../server && npm run test",
+    "install": "cd client && npm i && cd ../server && npm i",
+    "start:dev": "concurrently \"cd client && npm start\" \"cd server && npm start\""
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jmichaelbrown8/mobber.git"
@@ -13,43 +18,8 @@
   "bugs": {
     "url": "https://github.com/jmichaelbrown8/mobber/issues"
   },
-  "homepage": "http://jmichaelbrown8.github.io/mobber",
-  "dependencies": {
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
-    "@mui/icons-material": "^5.6.1",
-    "@mui/material": "^5.6.1",
-    "@reduxjs/toolkit": "^1.8.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "gh-pages": "^3.2.3",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-redux": "^7.2.8",
-    "react-scripts": "^5.0.1"
-  },
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "homepage": "https://github.com/jmichaelbrown8/mobber#readme",
+  "devDependencies": {
+    "concurrently": "^7.1.0"
   }
 }
