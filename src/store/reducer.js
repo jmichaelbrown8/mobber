@@ -1,12 +1,14 @@
 const initialState = {
   mob: [],
   rotations: 0,
+  elapsed: 0,
   time: {
     // all times stored as seconds
     elapsed: 0,
     running: false,
     remaining: 900,
     duration: 900,
+    timerStart: null,
   },
 };
 
@@ -61,6 +63,7 @@ export default function appReducer(state = initialState, action) {
         time: {
           ...state.time,
           running: !state.time.running,
+          timerStarted: !state.time.running ? action.payload : null,
         },
       };
     case "SET_DURATION":
@@ -76,13 +79,17 @@ export default function appReducer(state = initialState, action) {
               : state.time.remaining,
         },
       };
+    case "SET_ELAPSED":
+      return {
+        ...state,
+        elapsed: action.payload,
+      };
     case "SET_TIME":
       return {
         ...state,
         time: {
           ...state.time,
-          remaining: action.payload.remaining,
-          elapsed: action.payload.elapsed,
+          ...action.payload,
         },
       };
     case "ADD_TWO_MINUTES":

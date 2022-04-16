@@ -87,4 +87,40 @@ describe("Time reducers", () => {
     const result = reducer(initialState, action);
     expect(result.time.remaining).toEqual(220);
   });
+
+  it("Can set elapsed, remaining, and timerStart when started", () => {
+    const initialState = {
+      time: { remaining: 100, elapsed: 100, timerStart: null },
+    };
+
+    const action = {
+      type: "SET_TIME",
+      payload: {
+        remaining: 99,
+        elapsed: 101,
+        timerStart: new Date(1650089895982),
+      },
+    };
+    const result = reducer(initialState, action);
+    expect(result.time.remaining).toEqual(99);
+    expect(result.time.elapsed).toEqual(101);
+    expect(result.time.timerStart).toEqual(new Date(1650089895982));
+  });
+
+  it("Can set timerStart to null when stopped", () => {
+    const initialState = {
+      time: { remaining: 100, elapsed: 100, timerStart: null },
+    };
+
+    const action = {
+      type: "SET_TIME",
+      payload: {
+        timerStart: null,
+      },
+    };
+    const result = reducer(initialState, action);
+    expect(result.time.remaining).toEqual(100);
+    expect(result.time.elapsed).toEqual(100);
+    expect(result.time.timerStart).toEqual(null);
+  });
 });

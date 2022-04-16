@@ -3,10 +3,7 @@ import { useSelector } from "react-redux";
 import formatTime from "../utils/formatTime";
 
 export function Summary() {
-  const {
-    rotations,
-    time: { elapsed },
-  } = useSelector((state) => state);
+  const { rotations, elapsed } = useSelector((state) => state);
   return (
     <Box
       component="footer"
