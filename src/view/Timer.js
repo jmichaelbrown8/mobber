@@ -61,7 +61,10 @@ export function Timer() {
     return () => {
       clearInterval(timerId);
     };
-  }, [running]); // intentionally only affected by "running" state so it doesn't reset "now" variable in effect above which would cause timer drift
+    // intentionally only affected by "running" state so it doesn't
+    // reset "now" variable in effect above which would cause timer drift
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [running]);
 
   useEffect(() => {
     setPercent((remaining / duration) * 100);

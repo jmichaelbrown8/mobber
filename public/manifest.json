@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Mobber",
+  "name": "Mobber: Your Mob Programming Helper",
   "icons": [
     {
       "src": "favicon.ico",
