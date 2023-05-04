@@ -15,6 +15,7 @@ import {
   Container,
 } from "@mui/material";
 import { formatTime } from "../utils/formatTime";
+import { ActionType } from "../store/reducer";
 
 const pulseStyle = {
   animation: "pulse infinite 2s linear",
@@ -63,7 +64,7 @@ export function Timer() {
       const calcRemaining = startRemaining - difference;
       const calcElapsed = startElapsed + difference;
       store.dispatch({
-        type: "SET_TIME",
+        type: ActionType.SET_TIME,
         payload: { remaining: calcRemaining, elapsed: calcElapsed },
       });
     }, 100);
@@ -101,7 +102,7 @@ export function Timer() {
             <IconButton
               onClick={() =>
                 store.dispatch({
-                  type: "TOGGLE_TIMER",
+                  type: ActionType.TOGGLE_TIMER,
                 })
               }
               color="primary"
@@ -117,7 +118,7 @@ export function Timer() {
             <IconButton
               onClick={() =>
                 store.dispatch({
-                  type: "RESET_TIMER",
+                  type: ActionType.RESET_TIMER,
                 })
               }
               color="secondary"

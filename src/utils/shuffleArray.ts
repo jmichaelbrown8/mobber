@@ -1,4 +1,4 @@
-export const shuffleArray = (array) => {
+export const shuffleArray = (array: string[]): string[] => {
   const multiplier = array.length;
   if (multiplier <= 1) {
     return array;

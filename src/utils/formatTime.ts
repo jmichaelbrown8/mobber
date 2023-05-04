@@ -1,4 +1,4 @@
-export const formatTime = (seconds) => {
+export const formatTime = (seconds: number) => {
   // pull negative
   let multiplier = 1;
   if (seconds < 0) {

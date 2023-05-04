@@ -21,35 +21,53 @@ export const initialState: AppReducerState = {
   },
 };
 
+export enum ActionType {
+  ADD_MEMBER = "ADD_MEMBER",
+  REMOVE_MEMBER = "REMOVE_MEMBER",
+  ROTATE_MEMBERS = "ROTATE_MEMBERS",
+  SET_MEMBERS = "SET_MEMBERS",
+  DECREMENT_TIMER = "DECREMENT_TIMER",
+  RESET_TIMER = "RESET_TIMER",
+  TOGGLE_TIMER = "TOGGLE_TIMER",
+  SET_DURATION = "SET_DURATION",
+  SET_TIME = "SET_TIME",
+  ADD_TWO_MINUTES = "ADD_TWO_MINUTES",
+}
+
+export interface AppReducerAction {
+  type: ActionType;
+  payload?: any;
+}
+
 // Use the initialState as a default value
-export const appReducer = (state = initialState, action) => {
+export const appReducer = (state = initialState, action: AppReducerAction) => {
   // The reducer normally looks at the action type field to decide what happens
   switch (action.type) {
     // Member actions
-    case "ADD_MEMBER":
+    case ActionType.ADD_MEMBER:
       return {
         ...state,
         mob: [...state.mob, action.payload],
       };
-    case "REMOVE_MEMBER":
+    case ActionType.REMOVE_MEMBER:
       return {
         ...state,
         mob: state.mob.filter((mobber, index) => index !== action.payload),
       };
-    case "ROTATE_MEMBERS":
+    case ActionType.ROTATE_MEMBERS:
       return {
         ...state,
         mob: [...state.mob.slice(-1), ...state.mob.slice(0, -1)],
         rotations: state.rotations + 1,
       };
-    case "SET_MEMBERS":
+    case ActionType.SET_MEMBERS:
       return {
         ...state,
         mob: action.payload,
       };
 
     // Timer actions
-    case "DECREMENT_TIMER":
+    case ActionType.DECREMENT_TIMER:
       return {
         ...state,
         time: {
@@ -58,7 +76,7 @@ export const appReducer = (state = initialState, action) => {
           elapsed: state.time.elapsed + 1,
         },
       };
-    case "RESET_TIMER":
+    case ActionType.RESET_TIMER:
       return {
         ...state,
         time: {
@@ -66,7 +84,7 @@ export const appReducer = (state = initialState, action) => {
           remaining: state.time.duration,
         },
       };
-    case "TOGGLE_TIMER":
+    case ActionType.TOGGLE_TIMER:
       return {
         ...state,
         time: {
@@ -74,7 +92,7 @@ export const appReducer = (state = initialState, action) => {
           running: !state.time.running,
         },
       };
-    case "SET_DURATION":
+    case ActionType.SET_DURATION:
       return {
         ...state,
         time: {
@@ -87,7 +105,7 @@ export const appReducer = (state = initialState, action) => {
               : state.time.remaining,
         },
       };
-    case "SET_TIME":
+    case ActionType.SET_TIME:
       return {
         ...state,
         time: {
@@ -96,7 +114,7 @@ export const appReducer = (state = initialState, action) => {
           elapsed: action.payload.elapsed,
         },
       };
-    case "ADD_TWO_MINUTES":
+    case ActionType.ADD_TWO_MINUTES:
       return {
         ...state,
         time: {
@@ -106,6 +124,7 @@ export const appReducer = (state = initialState, action) => {
       };
 
     default:
+      console.error(`Unknown ActionType: ${action.type}`);
       // If this reducer doesn't recognize the action type, or doesn't
       // care about this specific action, return the existing state unchanged
       return state;

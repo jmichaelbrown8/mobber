@@ -15,30 +15,43 @@ import {
   Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
+import { ActionType } from "../store/reducer";
 
 interface MobState {
   mob: string[];
 }
 
+enum Role {
+  DRIVER = "Driver",
+  NAVIGATOR = "Navigator",
+  MOBBER = "Mobber",
+}
+
+/**
+ * Given the index number of the participant, returns their role in the mob.
+ *
+ * @param i {number} the index number of the participant
+ * @returns Role
+ */
+const getRole = (i: number): Role => {
+  switch (i) {
+    case 0:
+      return Role.DRIVER;
+    case 1:
+      return Role.NAVIGATOR;
+    default:
+      return Role.MOBBER;
+  }
+};
+
 export const Mob = () => {
   const mob = useSelector((state: MobState) => state.mob);
   const [userInput, setUserInput] = useState("");
 
-  const addUser = (e) => {
+  const addUser: React.FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    store.dispatch({ type: "ADD_MEMBER", payload: userInput });
+    store.dispatch({ type: ActionType.ADD_MEMBER, payload: userInput });
     setUserInput("");
-  };
-
-  const getRole = (i) => {
-    switch (i) {
-      case 0:
-        return "Driver";
-      case 1:
-        return "Navigator";
-      default:
-        return "Mobber";
-    }
   };
 
   const getNextDriver = () => {
@@ -52,7 +65,7 @@ export const Mob = () => {
 
   const shuffleMembers = () => {
     const newOrder = shuffleArray(mob);
-    store.dispatch({ type: "SET_MEMBERS", payload: newOrder });
+    store.dispatch({ type: ActionType.SET_MEMBERS, payload: newOrder });
   };
 
   return (
@@ -110,7 +123,7 @@ export const Mob = () => {
                         <IconButton
                           onClick={() =>
                             store.dispatch({
-                              type: "REMOVE_MEMBER",
+                              type: ActionType.REMOVE_MEMBER,
                               payload: i,
                             })
                           }
@@ -148,7 +161,7 @@ export const Mob = () => {
         <Tooltip title="Rotate roles">
           <IconButton
             onClick={() => {
-              store.dispatch({ type: "ROTATE_MEMBERS" });
+              store.dispatch({ type: ActionType.ROTATE_MEMBERS });
             }}
           >
             <RotateRightIcon fontSize="large" />
