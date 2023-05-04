@@ -1,4 +1,4 @@
-function formatTime(seconds) {
+export const formatTime = (seconds) => {
   // pull negative
   let multiplier = 1;
   if (seconds < 0) {
@@ -28,6 +28,4 @@ function formatTime(seconds) {
   const hours = Math.floor(minutes / 60);
   const remainingMinutes = minutes % 60;
   return `${hours * multiplier}h ${remainingMinutes}m`;
-}
-
-module.exports = formatTime;
+};

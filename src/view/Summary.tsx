@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Container, Link, Typography } from "@mui/material";
 import { useSelector } from "react-redux";
-import formatTime from "../utils/formatTime";
+import { formatTime } from "../utils/formatTime";
 
 interface SummaryState {
   rotations: number;

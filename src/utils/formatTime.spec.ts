@@ -1,4 +1,4 @@
-import formatTime from "./formatTime";
+import { formatTime } from "./formatTime";
 
 it("Handles all scope of positive and negative numbers appropriately", () => {
   expect(formatTime(-7260)).toBe("-2h 1m");

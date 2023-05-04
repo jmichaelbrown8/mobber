@@ -1,4 +1,4 @@
-export default function shuffleArray(array) {
+export const shuffleArray = (array) => {
   const multiplier = array.length;
   if (multiplier <= 1) {
     return array;
@@ -10,4 +10,4 @@ export default function shuffleArray(array) {
       array.slice(0, randomIndex).concat(array.slice(randomIndex + 1))
     ),
   ];
-}
+};

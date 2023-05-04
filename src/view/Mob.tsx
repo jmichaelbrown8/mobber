@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import store from "../store";
-import shuffleArray from "../utils/shuffleArray";
+import { shuffleArray } from "../utils/shuffleArray";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";

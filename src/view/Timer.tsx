@@ -14,7 +14,7 @@ import {
   LinearProgress,
   Container,
 } from "@mui/material";
-import formatTime from "../utils/formatTime";
+import { formatTime } from "../utils/formatTime";
 
 const pulseStyle = {
   animation: "pulse infinite 2s linear",
