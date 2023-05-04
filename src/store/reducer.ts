@@ -1,4 +1,15 @@
-const initialState = {
+export interface AppReducerState {
+  mob: string[];
+  rotations: number;
+  time: {
+    elapsed: number;
+    running: boolean;
+    remaining: number;
+    duration: number;
+  };
+}
+
+export const initialState: AppReducerState = {
   mob: [],
   rotations: 0,
   time: {
@@ -11,7 +22,7 @@ const initialState = {
 };
 
 // Use the initialState as a default value
-export default function appReducer(state = initialState, action) {
+export const appReducer = (state = initialState, action) => {
   // The reducer normally looks at the action type field to decide what happens
   switch (action.type) {
     // Member actions
@@ -99,4 +110,4 @@ export default function appReducer(state = initialState, action) {
       // care about this specific action, return the existing state unchanged
       return state;
   }
-}
+};

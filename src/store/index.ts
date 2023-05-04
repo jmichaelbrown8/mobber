@@ -1,5 +1,5 @@
 import { createStore } from "redux";
-import appReducer from "./reducer";
+import { appReducer } from "./reducer";
 
 // this can pull from localstorage or a persistent data store later
 let preloadedState = {
@@ -14,6 +14,7 @@ let preloadedState = {
   },
 };
 
+// TODO: Convert to configureStore as recommended
 const store = createStore(appReducer, preloadedState);
 
 export default store;
